@@ -7,15 +7,12 @@
   <body>
     <button id="playDing">DING!</button>
     <script>
-       var myDataRef = new Firebase('https://sweltering-inferno-8171.firebaseapp.com/web/data');
+       var myDataRef = new Firebase('https://sweltering-inferno-8171.firebaseio.com/kahu');
         $('#playDing').click(function () {
           console.log("hi")
-           result = myDataRef.push({play: "playDing"});
+           result = myDataRef.push({command: "playDing"});
            console.log(result)
         });
     </script>
   </body>
 </html>
-
-
-<!-- sweltering-inferno-8171.firebaseapp.com -->
