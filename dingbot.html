@@ -1,12 +1,12 @@
 <html>
   <head>
-    <title>DingBot</title>
+    <title>dingBot</title>
     <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
   </head>
   <body>
-    <h1>DingBot!</h1>
-    <h2>Audio Buttons</h2>
+    <h1>dingBot!</h1>
+    <h2>Audio</h2>
     <div id="createAudioBtn">
       <form>
         <input type="text" id="audioURL" placeholder="Enter Audio URL">
@@ -16,39 +16,30 @@
     </div>
     <div id="audioButtons">
     </div>
-
-
     <script>
       $('#createAudioBtn').submit(function (event) {
         var buttonID = $("#audioID").val()
         var audioURL = $("#audioURL").val()
         event.preventDefault()
         $( "#audioButtons" ).append( "<div><button data-url='"+ audioURL +"' id='show" + buttonID + "'>" + buttonID + "</button></div>" )
-        console.log(event)
-        console.log(audioURL)
-        // add a button inside a div with the id "showPictureID"
       });
 
       $('#audioButtons').click('button', function(event) {
-        alert('clicked')
-        console.log($(event.target).attr('data-url'))
+        // console.log($(event.target).attr('data-url'))
         var myDataRef = new Firebase('https://sweltering-inferno-8171.firebaseio.com/kahu')
-        myDataRef.push({command: "play", url: $(event.target).attr('data-url')})
+        myDataRef.push({command: "play " + $(event.target).attr('data-url') })
       })
     </script>
 
       <script>
-        var myDataRef = new Firebase('https://sweltering-inferno-8171.firebaseio.com/kahu')
-        $('#playAudio').click(function () {
-         myDataRef.push({command: "play", url: url})
-        });
+        // var myDataRef = new Firebase('https://sweltering-inferno-8171.firebaseio.com/kahu')
+        // $('#playAudio').click(function () {
+        //  myDataRef.push({command: "play", url: url})
+        // });
       </script>
     </div>
-    <br>
 
-<!-- http://www.universal-soundbank.com/802a/805020000000000000000000000pkjn800000000000000000000000000000090/g/85055050505050505050505/k/12768.mp3
- -->
-    <div id="showImage">
+<!--     <div id="showImage">
       <h2>Show Image</h2>
       <form id="createPicture">
         <input type="text" id="url" placeholder="Enter URL">
@@ -58,20 +49,20 @@
     </div>
     <div id="createdImages">
     </div>
+ -->
 
+   <script>
+      // $('#createPicture').submit(function (event) {
+      //   var buttonID = $("#pictureid").val()
+      //   event.preventDefault()
+      //   $( "#createdImages" ).append( "<div><button id='show" + buttonID + "'>" + buttonID + "</button></div>" )
+      //   console.log(event)
+      //   // add a button inside a div with the id "showPictureID"
+      // });
 
-        <script>
-      $('#createPicture').submit(function (event) {
-        var buttonID = $("#pictureid").val()
-        event.preventDefault()
-        $( "#createdImages" ).append( "<div><button id='show" + buttonID + "'>" + buttonID + "</button></div>" )
-        console.log(event)
-        // add a button inside a div with the id "showPictureID"
-      });
-
-      $('#createdImages').click('button', function(event) {
-        alert('clicked')
-      })
+      // $('#createdImages').click('button', function(event) {
+      //   alert('clicked')
+      // })
     </script>
 
   </body>
