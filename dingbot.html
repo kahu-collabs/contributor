@@ -6,12 +6,42 @@
   </head>
   <body>
     <h1>DingBot!</h1>
-    <button id="playDing">DING!</button>
-    <script>
-      var myDataRef = new Firebase('https://sweltering-inferno-8171.firebaseio.com/kahu');
-      $('#playDing').click(function () {
-       myDataRef.push({command: "playDing"});
+    <div id="playDing">
+      <button id="playDing">DING!</button>
+      <script>
+        var myDataRef = new Firebase('https://sweltering-inferno-8171.firebaseio.com/kahu')
+        $('#playDing').click(function () {
+         myDataRef.push({command: "play ding"})
+        });
+      </script>
+    </div>
+    <br>
+
+    <div id="showImage">
+      <h2>Show Image</h2>
+      <form id="createPicture">
+        <input type="text" id="url" placeholder="Enter URL">
+        <input type="text" id="pictureid" placeholder="Image name">
+        <button type="submit" id="createPicture">Submit</button>
+      </form>
+    </div>
+    <div id="createdImages">
+    </div>
+
+
+        <script>
+      $('#createPicture').submit(function (event) {
+        var buttonID = $("#pictureid").val()
+        event.preventDefault()
+        $( "#createdImages" ).append( "<div><button id='show" + buttonID + "'>" + buttonID + "</button></div>" )
+        console.log(event)
+        // add a button inside a div with the id "showPictureID"
       });
+
+      $('#createdImages').click('button', function(event) {
+        alert('clicked')
+      })
     </script>
+
   </body>
 </html>
