@@ -1,17 +1,69 @@
 <html>
   <head>
-    <title>DingBot</title>
+    <title>dingBot</title>
     <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
   </head>
   <body>
-    <h1>DingBot!</h1>
-    <button id="playDing">DING!</button>
+    <h1>dingBot!</h1>
+    <h2>Audio</h2>
+    <div id="createAudioBtn">
+      <form>
+        <input type="text" id="audioURL" placeholder="Enter Audio URL">
+        <input type="text" id="audioID" placeholder="Audio Name">
+        <button type="submit" id="createBtn">Submit</button>
+      </form>
+    </div>
+    <div id="audioButtons">
+    </div>
     <script>
-      var myDataRef = new Firebase('https://sweltering-inferno-8171.firebaseio.com/kahu');
-      $('#playDing').click(function () {
-       myDataRef.push({command: "playDing"});
+      $('#createAudioBtn').submit(function (event) {
+        var buttonID = $("#audioID").val()
+        var audioURL = $("#audioURL").val()
+        event.preventDefault()
+        $( "#audioButtons" ).append( "<div><button data-url='"+ audioURL +"' id='show" + buttonID + "'>" + buttonID + "</button></div>" )
       });
+
+      $('#audioButtons').click('button', function(event) {
+        // console.log($(event.target).attr('data-url'))
+        var myDataRef = new Firebase('https://sweltering-inferno-8171.firebaseio.com/kahu')
+        myDataRef.push({command: "play " + $(event.target).attr('data-url') })
+      })
     </script>
+
+      <script>
+        // var myDataRef = new Firebase('https://sweltering-inferno-8171.firebaseio.com/kahu')
+        // $('#playAudio').click(function () {
+        //  myDataRef.push({command: "play", url: url})
+        // });
+      </script>
+    </div>
+
+<!--     <div id="showImage">
+      <h2>Show Image</h2>
+      <form id="createPicture">
+        <input type="text" id="url" placeholder="Enter URL">
+        <input type="text" id="pictureid" placeholder="Image name">
+        <button type="submit" id="createPicture">Submit</button>
+      </form>
+    </div>
+    <div id="createdImages">
+    </div>
+ -->
+
+   <script>
+      // $('#createPicture').submit(function (event) {
+      //   var buttonID = $("#pictureid").val()
+      //   event.preventDefault()
+      //   $( "#createdImages" ).append( "<div><button id='show" + buttonID + "'>" + buttonID + "</button></div>" )
+      //   console.log(event)
+      //   // add a button inside a div with the id "showPictureID"
+      // });
+
+      // $('#createdImages').click('button', function(event) {
+      //   alert('clicked')
+      // })
+    </script>
+
   </body>
 </html>
