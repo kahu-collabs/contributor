@@ -3,6 +3,9 @@
     <title>dingBot</title>
     <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">    <script src="validator.js"></script>
   </head>
   <body>
     <h1>dingBot!</h1>
@@ -11,17 +14,25 @@
       <form>
         <input type="text" id="audioURL" placeholder="Enter Audio URL">
         <input type="text" id="audioID" placeholder="Audio Name">
-        <button type="submit" id="createBtn">Create My Button!</button>
+        <button type="submit" id="createBtn" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Create My Button!</button>
       </form>
     </div>
     <div id="audioButtons">
     </div>
     <script>
-      $('#createAudioBtn').submit(function (event) {
+
+      $('#createAudioBtn').submit(function(event) {
         var buttonID = $("#audioID").val()
         var audioURL = $("#audioURL").val()
+        var validator = new Validator()
         event.preventDefault()
-        $( "#audioButtons" ).append( "<div><button data-url='"+ audioURL +"' id='show" + buttonID + "'>" + buttonID + "</button></div>" )
+        if(validator.audioValidator(audioURL)){
+        $( "#audioButtons" ).append( "<div><button data-url='"+ audioURL +"' id='show" + buttonID + " '>" + buttonID + "</button></div>" )
+      }
+      else
+        {
+          alert("Requires valid audio file")
+        }
       });
 
       $('#audioButtons').click('button', function(event) {
@@ -36,7 +47,7 @@
       <form>
         <input type="text" id="imageURL" placeholder="Enter Image URL">
         <input type="text" id="imageID" placeholder="Image Name">
-        <button type="submit" id="createBtn">Create My Button!</button>
+        <button type="submit" id="createBtn" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Create My Button!</button>
       </form>
     </div>
     <div id="imageButtons">
@@ -45,8 +56,14 @@
       $('#createImageBtn').submit(function (event) {
         var buttonID = $("#imageID").val()
         var imageURL = $("#imageURL").val()
+        var validator = new Validator()
         event.preventDefault()
+        if(validator.imgValidator(imageURL)){
         $( "#imageButtons" ).append( "<div><button data-url='"+ imageURL +"' id='show" + buttonID + "'>" + buttonID + "</button></div>" )
+      }
+      else {
+        alert("Requires valid image file")
+      }
       });
 
       $('#imageButtons').click('button', function(event) {
