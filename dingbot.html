@@ -11,7 +11,7 @@
       <form>
         <input type="text" id="audioURL" placeholder="Enter Audio URL">
         <input type="text" id="audioID" placeholder="Audio Name">
-        <button type="submit" id="createBtn">Submit</button>
+        <button type="submit" id="createBtn">Create My Button!</button>
       </form>
     </div>
     <div id="audioButtons">
@@ -31,39 +31,42 @@
       })
     </script>
 
-      <script>
-        // var myDataRef = new Firebase('https://sweltering-inferno-8171.firebaseio.com/kahu')
-        // $('#playAudio').click(function () {
-        //  myDataRef.push({command: "play", url: url})
-        // });
-      </script>
-    </div>
-
-<!--     <div id="showImage">
-      <h2>Show Image</h2>
-      <form id="createPicture">
-        <input type="text" id="url" placeholder="Enter URL">
-        <input type="text" id="pictureid" placeholder="Image name">
-        <button type="submit" id="createPicture">Submit</button>
+    <h2>Image</h2>
+    <div id="createImageBtn">
+      <form>
+        <input type="text" id="imageURL" placeholder="Enter Image URL">
+        <input type="text" id="imageID" placeholder="Image Name">
+        <button type="submit" id="createBtn">Create My Button!</button>
       </form>
     </div>
-    <div id="createdImages">
+    <div id="imageButtons">
     </div>
- -->
+    <script>
+      $('#createImageBtn').submit(function (event) {
+        var buttonID = $("#imageID").val()
+        var imageURL = $("#imageURL").val()
+        event.preventDefault()
+        $( "#imageButtons" ).append( "<div><button data-url='"+ imageURL +"' id='show" + buttonID + "'>" + buttonID + "</button></div>" )
+      });
 
-   <script>
-      // $('#createPicture').submit(function (event) {
-      //   var buttonID = $("#pictureid").val()
-      //   event.preventDefault()
-      //   $( "#createdImages" ).append( "<div><button id='show" + buttonID + "'>" + buttonID + "</button></div>" )
-      //   console.log(event)
-      //   // add a button inside a div with the id "showPictureID"
-      // });
-
-      // $('#createdImages').click('button', function(event) {
-      //   alert('clicked')
-      // })
+      $('#imageButtons').click('button', function(event) {
+        console.log($(event.target).attr('data-url'))
+        var myDataRef = new Firebase('https://sweltering-inferno-8171.firebaseio.com/kahu')
+        myDataRef.push({command: "draw " + $(event.target).attr('data-url') })
+      })
     </script>
-
   </body>
 </html>
+
+<!--
+  AUDIO
+    Chicken
+    http://www.universal-soundbank.com/802a/805020000000000000000000000pkjn800000000000000000000000000000090/g/85055050505050505050505/k/2384.mp3
+
+  IMAGE
+    Rabbit
+    http://www.mrjohnsons.co.uk/uploads/small/Rabbits_Three.jpg
+
+    Joshua
+    http://www.buckybox.com/images/team-joshua-63101086.jpg
+-->
